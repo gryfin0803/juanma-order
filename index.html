@@ -1,1 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>娟嬤餛飩線上訂購</title>
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+<body>
+  <h2>娟嬤餛飩線上訂購 🥟</h2>
+  <p id="status">正在連接 LINE...</p>
 
+  <script>
+    const LIFF_ID = '2011071907';
+    const PREFILLED_URL =
+      'https://docs.google.com/forms/d/e/1FAIpQLSfDNrH98SfBcTH_YrDcVEeLVw3EtIJgmIURo8K_3-TATKzc5Q/viewform';
+
+    async function main() {
+      try {
+        await liff.init({
+          liffId: LIFF_ID
+        });
+
+        if (!liff.isLoggedIn()) {
+          liff.login();
+          return;
+        }
+
+        const profile = await liff.getProfile();
+
+        const formUrl = PREFILLED_URL.replace(
+          'LINEUSERID123456',
+          encodeURIComponent(profile.userId)
+        );
+
+        document.getElementById('status').innerText =
+          '正在開啟訂購表單...';
+
+        window.location.replace(formUrl);
+
+      } catch (error) {
+        document.getElementById('status').innerText =
+          'LINE 連線失敗：' + error.message;
+        console.error(error);
+      }
+    }
+
+    main();
+  </script>
+</body>
+</html>
