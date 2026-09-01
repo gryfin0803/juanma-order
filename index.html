@@ -142,7 +142,7 @@ const SCRIPT_URL =
 
 
 const GOOGLE_FORM_URL =
-  'https://docs.google.com/forms/d/e/1FAIpQLSfDNrH98SfBcTH_YrDcVEeLVw3EtIJgmIURo8K_3-TATKzc5Q/viewform';
+  'https://docs.google.com/forms/d/e/1FAIpQLSfDNrH98SfBcTH_YrDcVEeLVw3EtIJgmIURo8K_3-TATKzc5Q/viewform?usp=pp_url';
 
 
 let lineUserId = '';
@@ -273,14 +273,23 @@ function startOrder() {
 
 function bindingDone() {
 
+  const phone =
+    document.getElementById(
+      'phone'
+    ).value.trim();
+
   document.getElementById(
     'status'
   ).innerText =
     '正在開啟訂購表單...';
 
+  const formUrl =
+    GOOGLE_FORM_URL +
+    '&entry.1600944326=' +
+    encodeURIComponent(phone);
 
   window.location.replace(
-    GOOGLE_FORM_URL
+    formUrl
   );
 
 }
