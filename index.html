@@ -274,26 +274,14 @@ function startOrder() {
 function bindingDone() {
 
   const phone =
-    document.getElementById(
-      'phone'
-    ).value.trim();
-
-  document.getElementById(
-    'status'
-  ).innerText =
-    '正在開啟訂購表單...';
+    document.getElementById('phone').value.trim();
 
   const formUrl =
-    GOOGLE_FORM_URL +
-    '&entry.1600944326=' +
-    encodeURIComponent(phone);
+    'https://docs.google.com/forms/d/e/1FAIpQLSfDNrH98SfBcTH_YrDcVEeLVw3EtIJgmIURo8K_3-TATKzc5Q/viewform?usp=pp_url&entry.1600944326='
+    + encodeURIComponent(phone);
 
-  window.location.replace(
-    formUrl
-  );
-
+  window.location.href = formUrl;
 }
-
 
 main();
 
